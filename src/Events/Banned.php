@@ -10,7 +10,7 @@ class Banned
     use Dispatchable, SerializesModels;
 
     /** @var mixed $user The user that was banned. */
-    public $sender;
+    public $user;
 
     /** @var array $data The ban data associated. */
     public $data;
