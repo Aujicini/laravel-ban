@@ -14,6 +14,12 @@ class Visitor extends Model
         'expires_at' => 'datetime',
     ];
 
+    /** @var array $fillable The attributes that are mass assignable. */
+    protected $fillable = [
+        'visitor',
+        'expires_at'
+    ];
+
     /** @var string $table The table associated with the model. */
     protected $table = 'blacklists';
 }
