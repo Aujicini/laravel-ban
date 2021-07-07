@@ -17,6 +17,7 @@ class CreateBlacklistsTable extends Migration
             $table->id();
             $table->ipAddress('visitor');
             $table->foreignId('issued_by');
+            $table->string('namespace')->default('regular');
             $table->text('reason')->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
