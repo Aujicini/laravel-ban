@@ -16,6 +16,7 @@ class CreateBansTable extends Migration
         Schema::create('bans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('issued_by');
             $table->text('reason')->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
