@@ -14,6 +14,7 @@ class Ban extends Model
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = [
         'user_id',
+        'namespace',
         'reason',
         'expires_at',
     ];
