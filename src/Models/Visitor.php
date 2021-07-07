@@ -14,6 +14,7 @@ class Visitor extends Model
     /** @var array $fillable The attributes that are mass assignable. */
     protected $fillable = [
         'visitor',
+        'reason',
         'expires_at',
     ];
 
