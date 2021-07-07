@@ -2,13 +2,10 @@
 
 namespace Omatamix\LaravelBan\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Visitor extends Model
 {
-    use HasFactory;
-
     /** @var array $casts The attributes that should be cast. */
     protected $casts = [
         'expires_at' => 'datetime',
