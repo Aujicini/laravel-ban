@@ -16,6 +16,7 @@ class CreateBlacklistsTable extends Migration
         Schema::create('blacklists', function (Blueprint $table) {
             $table->id();
             $table->ipAddress('visitor');
+            $table->foreignId('issued_by');
             $table->text('reason')->nullable();
             $table->dateTime('expires_at')->nullable();
             $table->timestamps();
