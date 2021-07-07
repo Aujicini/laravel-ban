@@ -26,6 +26,6 @@ class Ban extends Model
      */
     public function bannable()
     {
-        return $this->morphTo();
+        return $this->morphTo('relation');
     }
 }
