@@ -10,13 +10,63 @@ use Omatamix\LaravelBan\Models\Visitor;
 trait Bannable
 {
     /**
-     * Get the users ban.
+     * Preform a regular user ban.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphOne Returns the relationship.
+     * @param array $banData A list of data assigned to the ban.
+     *
+     * @return void Returns nothing.
      */
-    public function relation()
+    public function ban(array $banData = [
+        'user_id'   => $this->id,
+        'issued_by' => Auth::id(),
+    ]) {
+        if (Auth::user()->canBan()) {
+            if ($this->canBeBanned()) {
+                if (!$this->isBanned()) {
+                    Ban::create($banData);
+                }
+            }
+        }
+    }
+
+    /**
+     * Can this user ban another user.
+     *
+     * @return bool Returns true or false.
+     */
+    public function canBan()
     {
-        return $this->morphOne(Ban::class, 'bannable');
+        return true;
+    }
+
+    /**
+     * Can this user be banned.
+     *
+     * @return bool Returns true or false.
+     */
+    public function canBeBanned()
+    {
+        return true;
+    }
+
+    /**
+     * Can this user be ip banned.
+     *
+     * @return bool Returns true or false.
+     */
+    public function canBeIpBanned()
+    {
+        return true;
+    }
+
+    /**
+     * Can this user ip ban another user.
+     *
+     * @return bool Returns true or false.
+     */
+    public function canIpBan()
+    {
+        return true;
     }
 
     /**
@@ -40,20 +90,12 @@ trait Bannable
     }
 
     /**
-     * Preform a regular user ban.
+     * Get the users ban.
      *
-     * @return void Returns nothing.
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne Returns the relationship.
      */
-    public function ban(array $banData = [
-        'user_id'   => $this->id,
-        'issued_by' => Auth::id(),
-    ]) {
-        if (Auth::user()->canIpBan()) {
-            if ($this->canBeIpBanned()) {
-                if (!$this->isBanned()) {
-                    Ban::create($banData);
-                }
-            }
-        }
+    public function relation()
+    {
+        return $this->morphOne(Ban::class, 'bannable');
     }
 }
