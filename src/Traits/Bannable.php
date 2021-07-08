@@ -22,16 +22,37 @@ trait Bannable
     /**
      * Preform an ip ban.
      *
+     * @param array $banData A list of data assigned to the ban.
+     *
      * @return void Returns nothing.
      */
-    public function ipBan($expires = null)
-    {
+    public function ipBan(array $banData = [
+        'visitor'   => Request::ip(),
+        'issued_by' => Auth::id(),
+    ]) {
         if (Auth::user()->canIpBan()) {
             if ($this->canBeIpBanned()) {
-                Visitor::create([
-                    'visitor'    => Request::ip(),
-                    'expires_at' => $expires,
-                ]);
+                if (!$this->isIpBanned()) {
+                    Visitor::create($banData);
+                }
+            }
+        }
+    }
+
+    /**
+     * Preform a regular user ban.
+     *
+     * @return void Returns nothing.
+     */
+    public function ban(array $banData = [
+        'user_id'   => $this->id,
+        'issued_by' => Auth::id(),
+    ]) {
+        if (Auth::user()->canIpBan()) {
+            if ($this->canBeIpBanned()) {
+                if (!$this->isBanned()) {
+                    Ban::create($banData);
+                }
             }
         }
     }
