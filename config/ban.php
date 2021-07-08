@@ -16,17 +16,4 @@ return [
 
     'namespace_support' => true,
 
-    /*
-    |--------------------------------------------------------------------------
-    | Ban Table Name
-    |--------------------------------------------------------------------------
-    |
-    | This defines the table name to use when migrating the database. This value can 
-    | be anything you want. This is useful if you have a table already defined bans. 
-    | This is to eliminate any conflict with the table names.
-    |
-    */
-
-    'ban_table' => 'bans',
-
 ];
